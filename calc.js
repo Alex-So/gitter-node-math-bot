@@ -43,7 +43,7 @@ gitter.rooms.join(botRoom)
 			}
 			else{
 				console.log('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
-				//room.send('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
+				room.send('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
 			}
 		}
 	});
