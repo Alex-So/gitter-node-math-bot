@@ -1,7 +1,7 @@
-//Название комнаты
+//Room name
 var botRoom = process.argv[2];
 
-//Токен для подключения бота
+//Token of user
 var botToken = process.argv[3];
 
 var Gitter = require('node-gitter');
@@ -43,7 +43,7 @@ gitter.rooms.join(botRoom)
 			}
 			else{
 				console.log('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
-				room.send(botMsg + '=' +  mathResult);
+				//room.send('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
 			}
 		}
 	});
