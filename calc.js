@@ -25,14 +25,15 @@ gitter.rooms.join(botRoom)
 		var botMsg = message.text;
 		console.log('New message:', botMsg);
 	
-		botMsg=botMsg.replace(/\s/g,'');
-		if(botMsg.indexOf('calc')==0){
+		botMsg = botMsg.replace(/\s/g,'');
+		if(botMsg.indexOf('calc') == 0){
 			botMsg = botMsg.substr(4);
 			botMsg = botMsg.split(/[^0-9\)\(\-\+\/\*\s]/);
 			botMsg = botMsg[0];
-			var mathMistake;
+			var mathMistake,
+				mathResult;
 			try{
-				var mathResult = eval(botMsg);
+				mathResult = eval(botMsg);
 			}
 			catch(e){
 				mathMistake = e.message;
@@ -42,8 +43,8 @@ gitter.rooms.join(botRoom)
 				room.send(botMsg + '=' +  mathResult);
 			}
 			else{
-				console.log('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
-				room.send('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
+				console.log('Math expression "' + botMsg + '" is incorrect! Mistake:' + mathMistake);
+				room.send('Math expression "' + botMsg + '" is incorrect! Mistake:' + mathMistake);
 			}
 		}
 	});
