@@ -1,26 +1,53 @@
-var https = require('https');
+//Название комнаты
+var botRoom = process.argv[2];
 
-var roomId    = process.env.ROOM_ID;
-var token     = process.env.TOKEN;
-var heartbeat = " \n";
+//Токен для подключения бота
+var botToken = process.argv[3];
 
-var options = {
-  hostname: 'stream.gitter.im',
-  port:     443,
-  path:     '/v1/rooms/' + roomId + '/chatMessages',
-  method:   'GET',
-  headers:  {'Authorization': 'Bearer ' + token}
-};
+var Gitter = require('node-gitter');
 
-var req = https.request(options, function(res) {
-  res.on('data', function(chunk) {
-    var msg = chunk.toString();
-    if (msg !== heartbeat) console.log('Message: ' + msg);
-  });
+var gitter = new Gitter(botToken);
+
+
+
+gitter.currentUser()
+.then(function(user) {
+  console.log('You are logged in as:', user.username);
 });
 
-req.on('error', function(e) {
-  console.log('Something went wrong: ' + e.message);
-});
+gitter.rooms.join(botRoom)
+.then(function(room) {
+	console.log('Joined room: ', room.name);
+  
+	var events = room.listen();
 
-req.end();
+	events.on('message', function(message) {
+		var botMsg = message.text;
+		console.log('New message:', botMsg);
+	
+		botMsg=botMsg.replace(/\s/g,'');
+		if(botMsg.indexOf('calc')==0){
+			botMsg = botMsg.substr(4);
+			botMsg = botMsg.split(/[^0-9\)\(\-\+\/\*\s]/);
+			botMsg = botMsg[0];
+			var mathMistake;
+			try{
+				var mathResult = eval(botMsg);
+			}
+			catch(e){
+				mathMistake = e.message;
+			}
+			if(!isNaN(parseFloat(mathResult)) && isFinite(mathResult) && !mathMistake){
+				console.log(botMsg + '=' +  mathResult);
+				room.send(botMsg + '=' +  mathResult);
+			}
+			else{
+				console.log('Math expression "'+botMsg+'" is incorrect! Mistake:' + mathMistake);
+				room.send(botMsg + '=' +  mathResult);
+			}
+		}
+	});
+})
+.fail(function(err) {
+	console.log('Not possible to join the room: ', err);
+})
