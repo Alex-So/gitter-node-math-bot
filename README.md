@@ -1,5 +1,5 @@
 #Description
-It is a simple math-bot for Gitter.imwhich recognises mathematical expressions, tries calculate it and return the result back to chat. It understands next symbols: 0-9,+,-,/,*,(,).
+It is a simple math-bot for Gitter.im which recognises mathematical expressions, tries calculate it and return the result back to chat. It understands next symbols: 0-9,+,-,/,*,(,).
 Bot reads all messages and answers to those of them, which begin from 'calc' and after that containt math expression.
 For example, on message "calc (1+3)/2" bot anwers with message "(1+3)/2=2".
 
