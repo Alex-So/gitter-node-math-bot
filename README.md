@@ -4,13 +4,13 @@ Bot reads all messages and answers to those of them, which begin from 'calc' and
 For example, on message "calc (1+3)/2" bot anwers with message "(1+3)/2=2".
 
 #How to use
-1.Regisret on Gitter.im
+1.Register on Gitter.im
 
 2.Install Node.js
 
-3.Intall node-gitter module(https://github.com/gitterHQ/node-gitter)
+3.Install node-gitter module(https://github.com/gitterHQ/node-gitter)
 
-4.Run in command line: "node cals.ls {room.name} {personal token on gitter.im}".
+4.Run in command line: "node cals.js {room.name} {personal token on gitter.im}".
 
      For example: "node calc.js Alex-So/alexso-uwc15 5gydow0cj5ksbzkm36f0hzr31qfuk3fnj653zlc".
 
